@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Crash Flash – Interaktiv</title>
+<style>
+  :root {
+    --bg: #0E1513;
+    --ink: #EDE9DE;
+    --ink-dim: #8A8F86;
+    --green: #A8D95E;
+    --green-dim: #7FA843;
+    --amber: #E8A54A;
+    --card: #141C19;
+    --hairline: #2A322E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Segoe UI', Calibri, system-ui, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--ink-dim);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .header .brand { color: var(--ink); }
+  .header .green { color: var(--green); }
+  .progress-bar {
+    height: 3px;
+    background: var(--hairline);
+  }
+  .progress-bar .fill {
+    height: 100%;
+    background: var(--green);
+    width: 0%;
+    transition: width 0.3s;
+  }
+  .slide-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    overflow: auto;
+  }
+  .slide {
+    display: none;
+    width: 100%;
+    max-width: 1100px;
+    animation: fadeIn 0.4s ease;
+  }
+  .slide.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .eyebrow {
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  h1 { font-family: Georgia, serif; font-size: 56px; font-weight: normal; line-height: 1.1; }
+  h2 { font-family: Georgia, serif; font-size: 36px; font-weight: normal; margin-bottom: 16px; }
+  .subtitle { font-family: Georgia, serif; font-size: 28px; color: var(--green); font-style: italic; margin-top: 8px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .card .label { font-family: Consolas, monospace; color: var(--green); font-size: 13px; letter-spacing: 1px; margin-bottom: 6px; }
+  .card h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 8px; }
+  .card p, .list-item { color: var(--ink-dim); font-size: 14px; line-height: 1.5; }
+  .row { display: flex; gap: 16px; align-items: baseline; margin: 10px 0; }
+  .row .num { font-family: Consolas, monospace; color: var(--green); min-width: 36px; }
+  .phases { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0; }
+  .phase {
+    background: var(--card);
+    border: 1px solid var(--green-dim);
+    border-radius: 6px;
+    padding: 12px 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 100px;
+    font-size: 13px;
+  }
+  .phase .n { color: var(--green); font-family: Consolas, monospace; font-size: 14px; }
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    border-top: 1px solid var(--hairline);
+    background: #0a100e;
+  }
+  button {
+    background: transparent;
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  button:hover { border-color: var(--green); color: var(--green); }
+  button.primary { background: var(--green); color: #0E1513; border-color: var(--green); font-weight: bold; }
+  button.primary:hover { background: #b8e56e; }
+  .audio-status { font-family: Consolas, monospace; font-size: 12px; color: var(--ink-dim); }
+  .nav-dots { display: flex; gap: 6px; }
+  .nav-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--hairline); cursor: pointer;
+  }
+  .nav-dots span.active { background: var(--green); }
+  .center-title { text-align: center; }
+  .note { color: var(--amber); font-style: italic; font-size: 13px; margin-top: 16px; }
+  @media (max-width: 800px) {
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    h1 { font-size: 40px; }
+    .slide-container { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div><span class="brand">CYBER_CRASH</span> // <span class="green">OFFENSIVE + DEFENSIVE</span></div>
+  <div id="page-indicator">01 / 14</div>
+</div>
+<div class="progress-bar"><div class="fill" id="progress"></div></div>
+
+<div class="slide-container" id="slides">
+
+  <!-- Slide 1 -->
+  <div class="slide active" data-audio="audio/slide01.mp3">
+    <div class="eyebrow">CYBERSECURITY · OFFENSIVE & DEFENSIVE</div>
+    <h1>Crash Flash</h1>
+    <div class="subtitle">Blue Team + Red Team</div>
+    <p style="margin-top:20px; color:var(--ink-dim); font-size:18px;">Fra CIA-triaden til MITRE ATT&CK på under en time</p>
+    <p style="margin-top:40px; font-family:Consolas,monospace; color:var(--green);">KØR IGANG →</p>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" data-audio="audio/slide02.mp3">
+    <div class="eyebrow">HØJHASTIGHEDS RUTE</div>
+    <h2>Agenda</h2>
+    <div class="row"><span class="num">01</span><div><strong>Fundamentet</strong><br><span class="list-item">CIA · Trusler · Mental model</span></div></div>
+    <div class="row"><span class="num">02</span><div><strong>Blue Team</strong><br><span class="list-item">Defense in Depth · Kontroller · SOC</span></div></div>
+    <div class="row"><span class="num">03</span><div><strong>Red Team</strong><br><span class="list-item">Kill Chain · MITRE · Angrebsvektorer</span></div></div>
+    <div class="row"><span class="num">04</span><div><strong>Frameworks & Tools</strong><br><span class="list-item">NIST · Zero Trust · Nmap · SIEM</span></div></div>
+    <div class="row"><span class="num">05</span><div><strong>Trends & Næste skridt</strong><br><span class="list-item">Ransomware · AI · Zero Trust · Lab</span></div></div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" data-audio="audio/slide03.mp3">
+    <div class="eyebrow">CIA-TRIADEN – ALT HANDLER OM DETTE</div>
+    <h2>Fundamentet</h2>
+    <div class="grid-3">
+      <div class="card">
+        <div class="label">Confidentiality</div>
+        <h3>Fortrolighed</h3>
+        <p>Kun autoriserede må se data<br>Kryptering · Adgangskontrol · DLP</p>
+      </div>
+      <div class="card">
+        <div class="label">Integrity</div>
+        <h3>Integritet</h3>
+        <p>Data må ikke ændres uautoriseret<br>Hashing · Signaturer · Versionering</p>
+      </div>
+      <div class="card">
+        <div class="label">Availability</div>
+        <h3>Tilgængelighed</h3>
+        <p>Systemet skal være oppe<br>Redundans · Backup · DDoS-beskyttelse</p>
+      </div>
+    </div>
+    <p style="margin-top:20px; color:var(--ink-dim); font-style:italic;">Alt i cybersecurity beskytter én eller flere af disse tre.</p>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide" data-audio="audio/slide04.mp3">
+    <div class="eyebrow">HVEM ANGRIBER – OG HVORFOR</div>
+    <h2>Trusler</h2>
+    <div class="row"><span class="num">01</span><div><strong>Script Kiddies</strong><br><span class="list-item">Opportunister · Automatiske tools · Lav skill</span></div></div>
+    <div class="row"><span class="num">02</span><div><strong>Cyberkriminalitet</strong><br><span class="list-item">Ransomware · Data tyveri · Finansiel gevinst</span></div></div>
+    <div class="row"><span class="num">03</span><div><strong>APT / Nationalstat</strong><br><span class="list-item">Langvarig · Målrettet · Spionage / sabotage</span></div></div>
+    <div class="row"><span class="num">04</span><div><strong>Insider</strong><br><span class="list-item">Uvidende eller ondsindet · Høj adgang</span></div></div>
+    <div class="row"><span class="num">05</span><div><strong>Supply Chain</strong><br><span class="list-item">Kompromitteret leverandør · SolarWinds-stil</span></div></div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide" data-audio="audio/slide05.mp3">
+    <div class="eyebrow">DEFENSIVE SECURITY</div>
+    <h2>Blue Team</h2>
+    <div class="subtitle" style="font-size:22px;">beskytter, detekterer og responderer.</div>
+    <div style="margin-top:24px;">
+      <p style="margin:10px 0; font-size:18px;">▸ Defense in Depth – flere lag af beskyttelse</p>
+      <p style="margin:10px 0; font-size:18px;">▸ Prevent → Detect → Respond → Recover</p>
+      <p style="margin:10px 0; font-size:18px;">▸ Identity, Endpoint, Network, Data, Cloud</p>
+      <p style="margin:10px 0; font-size:18px;">▸ SOC + SIEM + EDR + IR-planer</p>
+    </div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide" data-audio="audio/slide06.mp3">
+    <div class="eyebrow">DEFENSE IN DEPTH</div>
+    <h2>Lag af forsvar</h2>
+    <div class="grid-3">
+      <div class="card"><h3 style="color:var(--green);">Perimeter</h3><p>Firewall · WAF · DDoS</p></div>
+      <div class="card"><h3 style="color:var(--green);">Netværk</h3><p>Segmentering · IDS/IPS · Zero Trust</p></div>
+      <div class="card"><h3 style="color:var(--green);">Endpoint</h3><p>EDR · Antivirus · Patching</p></div>
+      <div class="card"><h3 style="color:var(--green);">Identitet</h3><p>MFA · IAM · Least Privilege</p></div>
+      <div class="card"><h3 style="color:var(--green);">Data</h3><p>Kryptering · DLP · Backup</p></div>
+      <div class="card"><h3 style="color:var(--green);">Mennesker</h3><p>Awareness · Phishing-træning</p></div>
+    </div>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide" data-audio="audio/slide07.mp3">
+    <div class="eyebrow">DE KONTROLLER DER GIVER MEST</div>
+    <h2>Nøgle kontroller</h2>
+    <div class="row"><strong style="min-width:200px;">MFA overalt</strong><span class="list-item">Stopper 99% af credential-angreb</span></div>
+    <div class="row"><strong style="min-width:200px;">Patching + EDR</strong><span class="list-item">Lukker kendte sårbarheder hurtigt</span></div>
+    <div class="row"><strong style="min-width:200px;">Least Privilege</strong><span class="list-item">Begræns blast radius</span></div>
+    <div class="row"><strong style="min-width:200px;">Backup + Test</strong><span class="list-item">Sidste forsvar mod ransomware</span></div>
+    <div class="row"><strong style="min-width:200px;">Logging & SIEM</strong><span class="list-item">Du kan ikke forsvare det, du ikke ser</span></div>
+    <div class="row"><strong style="min-width:200px;">Incident Response</strong><span class="list-item">Øv dig før det sker</span></div>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide" data-audio="audio/slide08.mp3">
+    <div class="eyebrow">OFFENSIVE SECURITY</div>
+    <h2>Red Team</h2>
+    <div class="subtitle" style="font-size:22px;">tænker som angriberen – så Blue kan forsvare bedre.</div>
+    <div style="margin-top:24px;">
+      <p style="margin:10px 0; font-size:18px;">▸ Penetration testing & Ethical Hacking</p>
+      <p style="margin:10px 0; font-size:18px;">▸ Forstå angrebs-livscyklus (Kill Chain)</p>
+      <p style="margin:10px 0; font-size:18px;">▸ MITRE ATT&CK som fælles sprog</p>
+      <p style="margin:10px 0; font-size:18px;">▸ Purple Team = Red + Blue samarbejde</p>
+    </div>
+  </div>
+
+  <!-- Slide 9 -->
+  <div class="slide" data-audio="audio/slide09.mp3">
+    <div class="eyebrow">ANGREBS-LIVSCYKLUS (HØJNIVEAU)</div>
+    <h2>Kill Chain</h2>
+    <div class="phases">
+      <div class="phase"><div class="n">1</div>Recon</div>
+      <div class="phase"><div class="n">2</div>Initial Access</div>
+      <div class="phase"><div class="n">3</div>Execution</div>
+      <div class="phase"><div class="n">4</div>Persistence</div>
+      <div class="phase"><div class="n">5</div>Privilege Esc.</div>
+      <div class="phase"><div class="n">6</div>Lateral Move</div>
+      <div class="phase"><div class="n">7</div>Exfil / Impact</div>
+    </div>
+    <p>MITRE ATT&CK = den detaljerede taksonomi bag disse faser. Brug den til både angreb og forsvar.</p>
+    <p class="note">Vigtigt: Dette er konceptuel viden – ikke en how-to guide.</p>
+  </div>
+
+  <!-- Slide 10 -->
+  <div class="slide" data-audio="audio/slide10.mp3">
+    <div class="eyebrow">ALMINDELIGE INDTRÆNGNINGSVEJE</div>
+    <h2>Angrebsvektorer</h2>
+    <div class="row"><strong style="min-width:280px;">Phishing / Social Engineering</strong><span style="color:var(--green);">Stadig #1 initial access</span></div>
+    <div class="row"><strong style="min-width:280px;">Credential Stuffing / Password Spray</strong><span style="color:var(--green);">Svage eller genbrugte passwords</span></div>
+    <div class="row"><strong style="min-width:280px;">Sårbarheder (CVE)</strong><span style="color:var(--green);">Upatchede systemer og applikationer</span></div>
+    <div class="row"><strong style="min-width:280px;">Misconfigurations</strong><span style="color:var(--green);">Åbne S3, svage IAM, default creds</span></div>
+    <div class="row"><strong style="min-width:280px;">Supply Chain</strong><span style="color:var(--green);">Tredjepartskomponenter og software</span></div>
+  </div>
+
+  <!-- Slide 11 -->
+  <div class="slide" data-audio="audio/slide11.mp3">
+    <div class="eyebrow">DE VIGTIGSTE RAMMEVÆRKER</div>
+    <h2>Frameworks</h2>
+    <div class="row"><strong style="color:var(--green); min-width:180px;">MITRE ATT&CK</strong><span class="list-item">Angriberens taktikker & teknikker – fælles sprog</span></div>
+    <div class="row"><strong style="color:var(--green); min-width:180px;">NIST CSF</strong><span class="list-item">Identify · Protect · Detect · Respond · Recover</span></div>
+    <div class="row"><strong style="color:var(--green); min-width:180px;">Zero Trust</strong><span class="list-item">Never trust, always verify – kontinuerlig validering</span></div>
+    <div class="row"><strong style="color:var(--green); min-width:180px;">ISO 27001</strong><span class="list-item">Informationssikkerhedsstyringssystem (ISMS)</span></div>
+    <div class="row"><strong style="color:var(--green); min-width:180px;">CIS Controls</strong><span class="list-item">Prioriterede, praktiske sikkerhedskontroller</span></div>
+  </div>
+
+  <!-- Slide 12 -->
+  <div class="slide" data-audio="audio/slide12.mp3">
+    <div class="eyebrow">VÆRKTØJER (KONCEPTUELT)</div>
+    <h2>Tools</h2>
+    <div class="grid-2">
+      <div>
+        <div class="eyebrow" style="color:var(--green);">DEFENSIVE</div>
+        <p style="font-size:16px; line-height:1.8;">SIEM (Splunk, Elastic)<br>EDR (CrowdStrike, Defender)<br>Firewall / WAF<br>Vulnerability Scanner<br>Backup & IR-platforme</p>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:var(--amber);">OFFENSIVE (AWARENESS)</div>
+        <p style="font-size:16px; line-height:1.8;">Nmap (scanning)<br>Wireshark (trafik)<br>Burp Suite (web)<br>Metasploit (framework)<br>BloodHound / AD-tools</p>
+      </div>
+    </div>
+    <p class="note">Brug kun i lab / autoriserede miljøer. Lær for at forsvare.</p>
+  </div>
+
+  <!-- Slide 13 -->
+  <div class="slide" data-audio="audio/slide13.mp3">
+    <div class="eyebrow">HVAD DER RAMMER LIGE NU</div>
+    <h2>Trends</h2>
+    <div class="row"><strong style="min-width:260px;">Ransomware-as-a-Service</strong><span class="list-item">Professionelt og udbredt</span></div>
+    <div class="row"><strong style="min-width:260px;">AI-assisterede angreb</strong><span class="list-item">Phishing + malware-generering</span></div>
+    <div class="row"><strong style="min-width:260px;">Cloud & Identity</strong><span class="list-item">Misconfig + token-tyveri</span></div>
+    <div class="row"><strong style="min-width:260px;">Zero Trust adoption</strong><span class="list-item">Fra perimeter til kontinuerlig validering</span></div>
+    <div class="row"><strong style="min-width:260px;">Supply Chain</strong><span class="list-item">Software og tredjepart</span></div>
+  </div>
+
+  <!-- Slide 14 -->
+  <div class="slide" data-audio="audio/slide14.mp3">
+    <div class="eyebrow">SÅDAN KOMMER DU VIDERE</div>
+    <h2>Næste skridt</h2>
+    <p style="font-family:Georgia,serif; font-size:28px; margin-bottom:16px;">Praktisk vej frem</p>
+    <p style="margin:8px 0; font-size:16px;">1. TryHackMe / HackTheBox – hands-on lab (start med intro paths)</p>
+    <p style="margin:8px 0; font-size:16px;">2. Læs MITRE ATT&CK + NIST CSF (gratis)</p>
+    <p style="margin:8px 0; font-size:16px;">3. Øv incident response i dit eget miljø</p>
+    <p style="margin:8px 0; font-size:16px;">4. Byg et lille lab: VM + Kali + Windows target</p>
+    <p style="margin:8px 0; font-size:16px;">5. Følg CISA / ENISA advisories</p>
+    <p style="margin-top:20px; color:var(--green); font-style:italic;">Du har nu overblikket. Næste skridt er praksis.</p>
+  </div>
+
+</div>
+
+<div class="controls">
+  <div>
+    <button id="prev">← Forrige</button>
+    <button id="next">Næste →</button>
+  </div>
+  <div class="nav-dots" id="dots"></div>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <span class="audio-status" id="audio-status">Klar</span>
+    <button id="play" class="primary">▶ Afspil tale</button>
+  </div>
+</div>
+
+<audio id="narration"></audio>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const audio = document.getElementById('narration');
+const playBtn = document.getElementById('play');
+const statusEl = document.getElementById('audio-status');
+const progress = document.getElementById('progress');
+const pageInd = document.getElementById('page-indicator');
+const dotsContainer = document.getElementById('dots');
+
+// Build dots
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('span');
+  d.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(d);
+}
+const dots = dotsContainer.querySelectorAll('span');
+
+function updateUI() {
+  slides.forEach((s, i) => s.classList.toggle('active', i === current));
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  pageInd.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  progress.style.width = ((current + 1) / total * 100) + '%';
+  // Load audio
+  const src = slides[current].dataset.audio;
+  audio.src = src;
+  audio.load();
+  statusEl.textContent = 'Klar';
+  playBtn.textContent = '▶ Afspil tale';
+}
+
+function goTo(n) {
+  if (n < 0 || n >= total) return;
+  audio.pause();
+  current = n;
+  updateUI();
+}
+
+document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+playBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().then(() => {
+      playBtn.textContent = '⏸ Pause';
+      statusEl.textContent = 'Afspiller...';
+    }).catch(() => {
+      statusEl.textContent = 'Klik for at afspille (browser-krav)';
+    });
+  } else {
+    audio.pause();
+    playBtn.textContent = '▶ Afspil tale';
+    statusEl.textContent = 'Pause';
+  }
+});
+
+audio.addEventListener('ended', () => {
+  playBtn.textContent = '▶ Afspil tale';
+  statusEl.textContent = 'Færdig';
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+  if (e.key === 'ArrowLeft') goTo(current - 1);
+  if (e.key === 'p' || e.key === 'P') playBtn.click();
+});
+
+updateUI();
+</script>
+</body>
+</html>
