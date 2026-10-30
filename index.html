@@ -131,7 +131,6 @@
     background: var(--hairline); cursor: pointer;
   }
   .nav-dots span.active { background: var(--green); }
-  .center-title { text-align: center; }
   .note { color: var(--amber); font-style: italic; font-size: 13px; margin-top: 16px; }
   @media (max-width: 800px) {
     .grid-3, .grid-2 { grid-template-columns: 1fr; }
@@ -149,8 +148,7 @@
 
 <div class="slide-container" id="slides">
 
-  <!-- Slide 1 -->
-  <div class="slide active" data-audio="audio/slide01.mp3">
+  <div class="slide active">
     <div class="eyebrow">CYBERSECURITY · OFFENSIVE & DEFENSIVE</div>
     <h1>Crash Flash</h1>
     <div class="subtitle">Blue Team + Red Team</div>
@@ -158,8 +156,7 @@
     <p style="margin-top:40px; font-family:Consolas,monospace; color:var(--green);">KØR IGANG →</p>
   </div>
 
-  <!-- Slide 2 -->
-  <div class="slide" data-audio="audio/slide02.mp3">
+  <div class="slide">
     <div class="eyebrow">HØJHASTIGHEDS RUTE</div>
     <h2>Agenda</h2>
     <div class="row"><span class="num">01</span><div><strong>Fundamentet</strong><br><span class="list-item">CIA · Trusler · Mental model</span></div></div>
@@ -169,8 +166,7 @@
     <div class="row"><span class="num">05</span><div><strong>Trends & Næste skridt</strong><br><span class="list-item">Ransomware · AI · Zero Trust · Lab</span></div></div>
   </div>
 
-  <!-- Slide 3 -->
-  <div class="slide" data-audio="audio/slide03.mp3">
+  <div class="slide">
     <div class="eyebrow">CIA-TRIADEN – ALT HANDLER OM DETTE</div>
     <h2>Fundamentet</h2>
     <div class="grid-3">
@@ -193,8 +189,7 @@
     <p style="margin-top:20px; color:var(--ink-dim); font-style:italic;">Alt i cybersecurity beskytter én eller flere af disse tre.</p>
   </div>
 
-  <!-- Slide 4 -->
-  <div class="slide" data-audio="audio/slide04.mp3">
+  <div class="slide">
     <div class="eyebrow">HVEM ANGRIBER – OG HVORFOR</div>
     <h2>Trusler</h2>
     <div class="row"><span class="num">01</span><div><strong>Script Kiddies</strong><br><span class="list-item">Opportunister · Automatiske tools · Lav skill</span></div></div>
@@ -204,8 +199,7 @@
     <div class="row"><span class="num">05</span><div><strong>Supply Chain</strong><br><span class="list-item">Kompromitteret leverandør · SolarWinds-stil</span></div></div>
   </div>
 
-  <!-- Slide 5 -->
-  <div class="slide" data-audio="audio/slide05.mp3">
+  <div class="slide">
     <div class="eyebrow">DEFENSIVE SECURITY</div>
     <h2>Blue Team</h2>
     <div class="subtitle" style="font-size:22px;">beskytter, detekterer og responderer.</div>
@@ -217,8 +211,7 @@
     </div>
   </div>
 
-  <!-- Slide 6 -->
-  <div class="slide" data-audio="audio/slide06.mp3">
+  <div class="slide">
     <div class="eyebrow">DEFENSE IN DEPTH</div>
     <h2>Lag af forsvar</h2>
     <div class="grid-3">
@@ -231,8 +224,7 @@
     </div>
   </div>
 
-  <!-- Slide 7 -->
-  <div class="slide" data-audio="audio/slide07.mp3">
+  <div class="slide">
     <div class="eyebrow">DE KONTROLLER DER GIVER MEST</div>
     <h2>Nøgle kontroller</h2>
     <div class="row"><strong style="min-width:200px;">MFA overalt</strong><span class="list-item">Stopper 99% af credential-angreb</span></div>
@@ -243,8 +235,7 @@
     <div class="row"><strong style="min-width:200px;">Incident Response</strong><span class="list-item">Øv dig før det sker</span></div>
   </div>
 
-  <!-- Slide 8 -->
-  <div class="slide" data-audio="audio/slide08.mp3">
+  <div class="slide">
     <div class="eyebrow">OFFENSIVE SECURITY</div>
     <h2>Red Team</h2>
     <div class="subtitle" style="font-size:22px;">tænker som angriberen – så Blue kan forsvare bedre.</div>
@@ -256,8 +247,7 @@
     </div>
   </div>
 
-  <!-- Slide 9 -->
-  <div class="slide" data-audio="audio/slide09.mp3">
+  <div class="slide">
     <div class="eyebrow">ANGREBS-LIVSCYKLUS (HØJNIVEAU)</div>
     <h2>Kill Chain</h2>
     <div class="phases">
@@ -273,8 +263,7 @@
     <p class="note">Vigtigt: Dette er konceptuel viden – ikke en how-to guide.</p>
   </div>
 
-  <!-- Slide 10 -->
-  <div class="slide" data-audio="audio/slide10.mp3">
+  <div class="slide">
     <div class="eyebrow">ALMINDELIGE INDTRÆNGNINGSVEJE</div>
     <h2>Angrebsvektorer</h2>
     <div class="row"><strong style="min-width:280px;">Phishing / Social Engineering</strong><span style="color:var(--green);">Stadig #1 initial access</span></div>
@@ -284,8 +273,7 @@
     <div class="row"><strong style="min-width:280px;">Supply Chain</strong><span style="color:var(--green);">Tredjepartskomponenter og software</span></div>
   </div>
 
-  <!-- Slide 11 -->
-  <div class="slide" data-audio="audio/slide11.mp3">
+  <div class="slide">
     <div class="eyebrow">DE VIGTIGSTE RAMMEVÆRKER</div>
     <h2>Frameworks</h2>
     <div class="row"><strong style="color:var(--green); min-width:180px;">MITRE ATT&CK</strong><span class="list-item">Angriberens taktikker & teknikker – fælles sprog</span></div>
@@ -295,8 +283,7 @@
     <div class="row"><strong style="color:var(--green); min-width:180px;">CIS Controls</strong><span class="list-item">Prioriterede, praktiske sikkerhedskontroller</span></div>
   </div>
 
-  <!-- Slide 12 -->
-  <div class="slide" data-audio="audio/slide12.mp3">
+  <div class="slide">
     <div class="eyebrow">VÆRKTØJER (KONCEPTUELT)</div>
     <h2>Tools</h2>
     <div class="grid-2">
@@ -312,8 +299,7 @@
     <p class="note">Brug kun i lab / autoriserede miljøer. Lær for at forsvare.</p>
   </div>
 
-  <!-- Slide 13 -->
-  <div class="slide" data-audio="audio/slide13.mp3">
+  <div class="slide">
     <div class="eyebrow">HVAD DER RAMMER LIGE NU</div>
     <h2>Trends</h2>
     <div class="row"><strong style="min-width:260px;">Ransomware-as-a-Service</strong><span class="list-item">Professionelt og udbredt</span></div>
@@ -323,8 +309,7 @@
     <div class="row"><strong style="min-width:260px;">Supply Chain</strong><span class="list-item">Software og tredjepart</span></div>
   </div>
 
-  <!-- Slide 14 -->
-  <div class="slide" data-audio="audio/slide14.mp3">
+  <div class="slide">
     <div class="eyebrow">SÅDAN KOMMER DU VIDERE</div>
     <h2>Næste skridt</h2>
     <p style="font-family:Georgia,serif; font-size:28px; margin-bottom:16px;">Praktisk vej frem</p>
@@ -350,18 +335,33 @@
   </div>
 </div>
 
-<audio id="narration"></audio>
-
 <script>
+const narrations = [
+  "Velkommen til Crash Flash. Vi dækker både Blue Team og Red Team på under en time. Fra CIA-triaden til MITRE ATT and CK. Kør i gang.",
+  "Vi kører fem blokke: Fundamentet, Blue Team, Red Team, Frameworks og Tools, og til sidst trends plus næste skridt. Hold tempoet højt – stil spørgsmål bagefter.",
+  "Alt i cybersecurity handler om tre ting: Fortrolighed, kun de rigtige ser data. Integritet, data må ikke ændres uautoriseret. Og Tilgængelighed, systemet skal være oppe. Kryptering, hashing og redundans. Det er fundamentet.",
+  "Hvem angriber? Script kiddies med tools. Cyberkriminalitet der vil tjene penge på ransomware. APT'er og nationalstater med langvarige, målrettede angreb. Insiders. Og supply chain – kompromitterede leverandører. Forstå motivet, så forstår du forsvaret.",
+  "Blue Team beskytter, detekterer og responderer. Defense in Depth. Prevent, Detect, Respond, Recover. Identitet, endpoint, netværk, data og cloud. SOC, SIEM, EDR og en øvet incident response-plan.",
+  "Flere lag: Perimeter med firewall og WAF. Netværk med segmentering og Zero Trust. Endpoint med EDR og patching. Identitet med MFA og least privilege. Data med kryptering og backup. Og mennesker med awareness. Ét lag falder – de andre holder.",
+  "Det der giver mest: MFA overalt. Patching plus EDR. Least privilege. Backup du faktisk tester. Logging og SIEM – du kan ikke forsvare det, du ikke ser. Og en incident response-plan du har øvet.",
+  "Red Team tænker som angriberen, så Blue kan forsvare bedre. Penetration testing, ethical hacking, kill chain og MITRE ATT and CK som fælles sprog. Purple Team er når de to arbejder sammen.",
+  "Angrebs-livscyklus på højt niveau: Recon, Initial Access, Execution, Persistence, Privilege Escalation, Lateral Movement, og til sidst Exfil eller Impact. MITRE ATT and CK er den detaljerede taksonomi bag. Dette er konceptuel viden – ikke en how-to.",
+  "De mest almindelige veje ind: Phishing og social engineering, stadig nummer ét. Credential stuffing og password spray. Upatchede sårbarheder. Misconfigurations som åbne buckets og svage IAM. Og supply chain.",
+  "De vigtigste frameworks: MITRE ATT and CK, angriberens sprog. NIST CSF med Identify, Protect, Detect, Respond, Recover. Zero Trust, never trust, always verify. ISO 27001 for styringssystem. Og CIS Controls for praktiske prioriteringer.",
+  "Defensive værktøjer: SIEM, EDR, firewall, vulnerability scanner, backup-platforme. Offensive awareness: Nmap, Wireshark, Burp, Metasploit, BloodHound. Kun i lab eller autoriserede miljøer. Lær for at forsvare.",
+  "Lige nu: Ransomware-as-a-Service. AI-assisterede angreb, især phishing. Cloud og identity-misconfig. Zero Trust adoption. Supply chain-angreb. Det er her fokus ligger.",
+  "Praktisk vej: TryHackMe eller HackTheBox, start med intro paths. Læs MITRE og NIST, de er gratis. Øv incident response. Byg et lille lab med VM, Kali og et Windows-target. Følg CISA og ENISA. Du har nu overblikket – næste skridt er praksis."
+];
+
 const slides = document.querySelectorAll('.slide');
 const total = slides.length;
 let current = 0;
-const audio = document.getElementById('narration');
 const playBtn = document.getElementById('play');
 const statusEl = document.getElementById('audio-status');
 const progress = document.getElementById('progress');
 const pageInd = document.getElementById('page-indicator');
 const dotsContainer = document.getElementById('dots');
+let speaking = false;
 
 // Build dots
 for (let i = 0; i < total; i++) {
@@ -376,17 +376,43 @@ function updateUI() {
   dots.forEach((d, i) => d.classList.toggle('active', i === current));
   pageInd.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
   progress.style.width = ((current + 1) / total * 100) + '%';
-  // Load audio
-  const src = slides[current].dataset.audio;
-  audio.src = src;
-  audio.load();
   statusEl.textContent = 'Klar';
   playBtn.textContent = '▶ Afspil tale';
+  speaking = false;
+}
+
+function speak(text) {
+  if (!window.speechSynthesis) {
+    statusEl.textContent = 'Tale ikke understøttet i denne browser';
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'da-DK';
+  utter.rate = 0.95;
+  const voices = window.speechSynthesis.getVoices();
+  const daVoice = voices.find(v => v.lang.startsWith('da')) || voices.find(v => v.lang.startsWith('da-DK'));
+  if (daVoice) utter.voice = daVoice;
+  utter.onstart = () => {
+    speaking = true;
+    playBtn.textContent = '⏸ Pause';
+    statusEl.textContent = 'Afspiller...';
+  };
+  utter.onend = () => {
+    speaking = false;
+    playBtn.textContent = '▶ Afspil tale';
+    statusEl.textContent = 'Færdig';
+  };
+  utter.onerror = () => {
+    statusEl.textContent = 'Fejl ved tale';
+    speaking = false;
+  };
+  window.speechSynthesis.speak(utter);
 }
 
 function goTo(n) {
   if (n < 0 || n >= total) return;
-  audio.pause();
+  window.speechSynthesis.cancel();
   current = n;
   updateUI();
 }
@@ -395,23 +421,14 @@ document.getElementById('prev').addEventListener('click', () => goTo(current - 1
 document.getElementById('next').addEventListener('click', () => goTo(current + 1));
 
 playBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play().then(() => {
-      playBtn.textContent = '⏸ Pause';
-      statusEl.textContent = 'Afspiller...';
-    }).catch(() => {
-      statusEl.textContent = 'Klik for at afspille (browser-krav)';
-    });
-  } else {
-    audio.pause();
+  if (speaking) {
+    window.speechSynthesis.cancel();
+    speaking = false;
     playBtn.textContent = '▶ Afspil tale';
     statusEl.textContent = 'Pause';
+  } else {
+    speak(narrations[current]);
   }
-});
-
-audio.addEventListener('ended', () => {
-  playBtn.textContent = '▶ Afspil tale';
-  statusEl.textContent = 'Færdig';
 });
 
 document.addEventListener('keydown', (e) => {
@@ -419,6 +436,11 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') goTo(current - 1);
   if (e.key === 'p' || e.key === 'P') playBtn.click();
 });
+
+// Preload voices
+if (window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+}
 
 updateUI();
 </script>
